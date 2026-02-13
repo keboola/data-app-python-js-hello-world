@@ -10,7 +10,7 @@ uv sync
 
 echo "Installing frontend dependencies and building..."
 cd /app/frontend
-npm install
-npm run build
+yarn install
+yarn build
 
 echo "Setup complete!"
