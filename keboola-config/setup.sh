@@ -1,16 +1,15 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
-# Ensure /usr/local/bin is in PATH (for npm, node)
-export PATH="/usr/local/bin:$PATH"
-
-echo "Installing backend dependencies..."
+echo "=== Installing backend dependencies ==="
 cd /app/backend
 uv sync
 
-echo "Installing frontend dependencies and building..."
+echo "=== Installing frontend dependencies ==="
 cd /app/frontend
-yarn install
-yarn build
+/usr/local/bin/yarn install
 
-echo "Setup complete!"
+echo "=== Building frontend ==="
+/usr/local/bin/yarn build
+
+echo "=== Setup complete ==="
