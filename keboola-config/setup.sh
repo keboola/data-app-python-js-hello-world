@@ -7,9 +7,14 @@ uv sync
 
 echo "=== Installing frontend dependencies ==="
 cd /app/frontend
-/usr/local/bin/yarn install
+
+# Enable yarn via corepack (bundled with Node.js)
+corepack enable
+corepack prepare yarn@stable --activate
+
+yarn install
 
 echo "=== Building frontend ==="
-/usr/local/bin/yarn build
+yarn build
 
 echo "=== Setup complete ==="
