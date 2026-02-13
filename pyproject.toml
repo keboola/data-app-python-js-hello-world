@@ -1,8 +1,7 @@
 [project]
-name = "data-app-backend"
+name = "data-app-hello-world"
 version = "0.1.0"
-description = "FastAPI backend for React + FastAPI Hello World demo"
-readme = "README.md"
+description = "React + FastAPI Hello World demo data app"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.109.0",
@@ -10,6 +9,3 @@ dependencies = [
     "pandas>=2.2.0",
     "numpy>=1.26.0",
 ]
-
-[dependency-groups]
-dev = []

@@ -2,7 +2,7 @@ from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
 
-from data.sample_data import (
+from backend.data.sample_data import (
     generate_stock_data,
     generate_sales_data,
     generate_employee_data,

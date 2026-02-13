@@ -6,10 +6,11 @@ echo "=== Debug: checking available tools ==="
 echo "PATH: $PATH"
 which node || echo "node not found in PATH"
 which npm || echo "npm not found in PATH"
+which yarn || echo "yarn not found in PATH"
 ls -la /usr/local/bin/ | head -20 || true
 
-echo "=== Installing backend dependencies ==="
-cd /app/backend
+echo "=== Installing Python dependencies ==="
+cd /app
 uv sync
 
 echo "=== Installing frontend dependencies ==="
