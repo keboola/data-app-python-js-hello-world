@@ -11,5 +11,5 @@ dependencies = [
     "numpy>=1.26.0",
 ]
 
-[tool.uv]
-dev-dependencies = []
+[dependency-groups]
+dev = []
