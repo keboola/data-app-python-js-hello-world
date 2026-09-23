@@ -1,13 +1,18 @@
 #!/bin/bash
 set -euo pipefail
 
-# The runtime image exports KBC_APP_BAKED=1 when an image builder has already run
-# this script and committed the result. Everything below is install-and-build
-# work with no per-boot half, so on a baked image there is nothing left to do.
-# entrypoint.sh runs setup.sh either way -- the flag is advisory -- so without
-# this guard every start rebuilds a frontend that is already in the image layer.
-if [ "${KBC_APP_BAKED:-}" = "1" ]; then
-  echo "=== Baked image: dependencies installed and frontend built at build time, skipping ==="
+# The image builder runs this script during the build and writes its build
+# marker only afterwards, so the marker is absent during the build and present
+# at every boot of the resulting image. entrypoint.sh runs setup.sh either way
+# and exports nothing to say which is which -- without this check every start
+# rebuilds a frontend that is already in the image layer.
+#
+# The marker's path comes from the build contract rather than being hardcoded,
+# so a base image that moves it does not silently turn this check off.
+KBC_BUILD_MARKER=$(jq -r '.buildMarker // empty' \
+  /usr/local/keboola/build-contract.json 2>/dev/null || true)
+if [ -n "${KBC_BUILD_MARKER}" ] && [ -f "${KBC_BUILD_MARKER}" ]; then
+  echo "=== Prebuilt image: dependencies installed and frontend built at build time, skipping ==="
   exit 0
 fi
 
